@@ -5,6 +5,9 @@ export const BASE_URL = "https://api.themoviedb.org/3";
 export const getImage = (poster_path: string) => {
   return `https://image.tmdb.org/t/p/w500${poster_path}`;
 };
+export const getBackdropImage = (backdrop_path: string) => {
+  return `https://image.tmdb.org/t/p/original/${backdrop_path}`;
+};
 export const genres: Genres[] = [
   {
     id: 28,
@@ -83,3 +86,9 @@ export const genres: Genres[] = [
     name: "Western",
   },
 ];
+export const formatCurrency = (currency: number) => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(currency);
+};

@@ -1,11 +1,9 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Headers from "../components/Home/Headers";
 import MovieSlide from "../components/Movie/MovieSlide";
 import { useQuery } from "@tanstack/react-query";
 import { getHome } from "../services/HomeServices";
-import MovieTitle from "../components/Movie/MovieTitle";
-import MovieCard from "../components/Movie/MovieCard";
 
 const Home = () => {
   const { data } = useQuery(["Home"], getHome);
@@ -18,21 +16,13 @@ const Home = () => {
     );
   }
 
-  const [trending, popular] = data;
-
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
         <Headers />
-        <MovieSlide data={trending.results} title="Trending" />
-        <View>
-          <MovieTitle title="Popular" />
-          <View style={styles.list}>
-            {popular?.results?.map((item) => (
-              <MovieCard key={item.id} item={item} />
-            ))}
-          </View>
-        </View>
+        {Object.keys(data).map((item) => (
+          <MovieSlide key={item} title={item} data={data[item]} />
+        ))}
       </SafeAreaView>
     </ScrollView>
   );

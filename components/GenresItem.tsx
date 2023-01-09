@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 import { Genres } from "../types/index.types";
 
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#DBE3FF",
     borderRadius: 50,
     marginEnd: 4,
+    marginVertical: 5,
   },
   genresText: {
     fontSize: 10,

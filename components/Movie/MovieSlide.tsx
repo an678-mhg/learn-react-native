@@ -1,10 +1,4 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import React from "react";
 import { Movie } from "../../types/index.types";
 import MovieItem from "./MovieItem";
@@ -13,14 +7,20 @@ import MovieTitle from "./MovieTitle";
 interface MovieSlideProps {
   title: string;
   data: Movie[];
+  isShowTitle?: boolean;
 }
 
-export default function MovieSlide({ title, data }: MovieSlideProps) {
+export default function MovieSlide({
+  title,
+  data,
+  isShowTitle = true,
+}: MovieSlideProps) {
   return (
     <View style={styles.movieSlideContainer}>
-      <MovieTitle title={title} />
+      {isShowTitle && <MovieTitle title={title} />}
       <FlatList
-        style={styles.movieSlideList}
+        showsHorizontalScrollIndicator={false}
+        style={isShowTitle && styles.movieSlideList}
         horizontal
         data={data}
         renderItem={({ item }) => <MovieItem key={item.id} item={item} />}

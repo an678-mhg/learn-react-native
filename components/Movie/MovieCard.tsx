@@ -36,7 +36,7 @@ export default function MovieCard({ item }: MovieCardProps) {
           <Text style={styles.movieItemStarTitle}>{item.vote_average}</Text>
         </View>
         <View style={styles.movieCardGenresList}>
-          {(item.genre_ids.length > 3
+          {(item?.genre_ids?.length > 3
             ? item.genre_ids.slice(0, 3)
             : item.genre_ids
           )?.map((item) => (

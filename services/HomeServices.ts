@@ -1,4 +1,4 @@
-import { MovieResponse } from "../types/index.types";
+import { Movie, Response } from "../types/index.types";
 import client from "../utils/axios";
 
 const HomeAPI: { [key: string]: { url: string; media_type: "movie" | "tv" } } =
@@ -14,7 +14,7 @@ const HomeAPI: { [key: string]: { url: string; media_type: "movie" | "tv" } } =
 export const getHome = async (): Promise<any> => {
   const response = await Promise.all(
     Object.keys(HomeAPI).map((item) =>
-      client.get<MovieResponse>(HomeAPI[item].url)
+      client.get<Response<Movie>>(HomeAPI[item].url)
     )
   );
 

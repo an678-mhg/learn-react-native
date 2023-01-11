@@ -9,7 +9,7 @@ interface GenresItemProps {
 export default function GenresItem({ item }: GenresItemProps) {
   return (
     <TouchableOpacity style={styles.genresContainer}>
-      <Text style={styles.genresText}>{item.name}</Text>
+      <Text style={styles.genresText}>{item?.name || "Unknown"}</Text>
     </TouchableOpacity>
   );
 }

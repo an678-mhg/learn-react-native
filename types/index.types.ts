@@ -21,9 +21,9 @@ export interface Movie {
   name: string;
 }
 
-export interface MovieResponse {
+export interface Response<T> {
   page: number;
-  results: Movie[];
+  results: T[];
   total_pages: number;
   total_results: number;
 }

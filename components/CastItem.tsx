@@ -1,7 +1,7 @@
 import { Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import { Cast } from "../../types/index.types";
-import { getImage } from "../../utils/contanst";
+import { Cast } from "../types/index.types";
+import { getImage } from "../utils/contanst";
 
 export default function CastItem({ item }: { item: Cast }) {
   return (

@@ -19,7 +19,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialCommunity from "react-native-vector-icons/MaterialCommunityIcons";
 import GenresItem from "../components/GenresItem";
-import CastItem from "../components/Cast/CastItem";
+import CastItem from "../components/CastItem";
 import MovieSlide from "../components/Movie/MovieSlide";
 
 type DetailsProps = NativeStackScreenProps<StackParamList, "Details">;
@@ -58,9 +58,10 @@ const Details = ({ route }: DetailsProps) => {
               color="#fff"
             />
           </View>
-          <View style={styles.detailPlayButton}>
-            <AntDesign size={40} color="#fff" name="play" />
-          </View>
+        </SafeAreaView>
+
+        <SafeAreaView style={styles.detailPlayButton}>
+          <AntDesign size={40} color="#fff" name="play" />
         </SafeAreaView>
       </View>
       <View style={styles.detailMovieContent}>
@@ -123,7 +124,7 @@ const Details = ({ route }: DetailsProps) => {
               showsHorizontalScrollIndicator={false}
               style={{ marginTop: 10 }}
               horizontal
-              data={credit.cast}
+              data={credit.cast?.slice(0, 10)}
               renderItem={({ item }) => (
                 <CastItem key={item.cast_id} item={item} />
               )}
@@ -155,6 +156,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "column",
     height: "100%",
+    zIndex: 2,
   },
   detailBackDot: {
     width: "100%",
@@ -163,10 +165,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   detailPlayButton: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    position: "absolute",
+    width: "100%",
     height: "100%",
+    backgroundColor: "#33333380",
   },
   detailPlayButtonText: {
     fontSize: 14,

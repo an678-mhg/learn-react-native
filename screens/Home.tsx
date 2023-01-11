@@ -1,6 +1,6 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Headers from "../components/Home/Headers";
+import Headers from "../components/Headers";
 import MovieSlide from "../components/Movie/MovieSlide";
 import { useQuery } from "@tanstack/react-query";
 import { getHome } from "../services/HomeServices";
@@ -9,11 +9,7 @@ const Home = () => {
   const { data } = useQuery(["Home"], getHome);
 
   if (!data) {
-    return (
-      <View>
-        <Text>Loading....</Text>
-      </View>
-    );
+    return <Text>Loading....</Text>;
   }
 
   return (

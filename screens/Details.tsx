@@ -5,14 +5,15 @@ import {
   StyleSheet,
   Text,
   View,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigation } from "@react-navigation/native";
 import { Navigation, StackParamList } from "../types/index.types";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { getMovieDetail } from "../services/MovieDetailServices";
-import { getBackdropImage } from "../utils/contanst";
+import { getMovieDetail } from "../services/MovieServices";
+import { getBackdropImage, getImagePlacehoder } from "../utils/contanst";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -21,6 +22,8 @@ import MaterialCommunity from "react-native-vector-icons/MaterialCommunityIcons"
 import GenresItem from "../components/GenresItem";
 import CastItem from "../components/CastItem";
 import MovieSlide from "../components/Movie/MovieSlide";
+import Loading from "../components/Loading";
+import ModalTrailer from "../components/ModalTrailer";
 
 type DetailsProps = NativeStackScreenProps<StackParamList, "Details">;
 
@@ -30,19 +33,29 @@ const Details = ({ route }: DetailsProps) => {
     getMovieDetail(id, media_type)
   );
   const navigation = useNavigation<Navigation>();
+  const [openTrailer, setOpenTrailer] = useState(false);
+
+  const handleOpenTrailer = () => {
+    if (videos?.results?.length === 0) return Alert.alert("Video not found!");
+    setOpenTrailer(true);
+  };
 
   if (!data) {
-    return <Text>Loading...</Text>;
+    return <Loading />;
   }
 
-  const [movie, credit, similar] = data;
+  const [movie, credit, similar, videos] = data;
 
   return (
     <ScrollView>
       <View style={styles.detailBackdropImageWrap}>
         <Image
           style={styles.detailBackdropImage}
-          source={{ uri: getBackdropImage(movie.backdrop_path) }}
+          source={{
+            uri: movie.backdrop_path
+              ? getBackdropImage(movie.backdrop_path)
+              : getImagePlacehoder(),
+          }}
         />
         <SafeAreaView style={styles.detailGoBackWrap}>
           <View style={styles.detailBackDot}>
@@ -60,9 +73,14 @@ const Details = ({ route }: DetailsProps) => {
           </View>
         </SafeAreaView>
 
-        <SafeAreaView style={styles.detailPlayButton}>
-          <AntDesign size={40} color="#fff" name="play" />
-        </SafeAreaView>
+        <View style={styles.detailPlayButton}>
+          <AntDesign
+            onPress={handleOpenTrailer}
+            size={40}
+            color="#fff"
+            name="play"
+          />
+        </View>
       </View>
       <View style={styles.detailMovieContent}>
         <View style={styles.detailMovieContentWrapTitleStart}>
@@ -138,6 +156,16 @@ const Details = ({ route }: DetailsProps) => {
           </View>
         )}
       </View>
+
+      {openTrailer && (
+        <ModalTrailer
+          video={videos.results[0]}
+          visible={openTrailer}
+          handleClose={() => {
+            setOpenTrailer(false);
+          }}
+        />
+      )}
     </ScrollView>
   );
 };
@@ -152,10 +180,9 @@ const styles = StyleSheet.create({
   },
   detailGoBackWrap: {
     position: "absolute",
-    paddingHorizontal: 16,
+    padding: 16,
     width: "100%",
     flexDirection: "column",
-    height: "100%",
     zIndex: 2,
   },
   detailBackDot: {
@@ -168,8 +195,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
-    width: "100%",
-    height: "100%",
+    bottom: 0,
+    top: 0,
+    left: 0,
+    right: 0,
     backgroundColor: "#33333380",
   },
   detailPlayButtonText: {

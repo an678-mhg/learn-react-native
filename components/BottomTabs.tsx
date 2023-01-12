@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator<TabParamList>();
 function BottomTabs() {
   return (
     <Tab.Navigator
-      screenOptions={{ headerShown: false, tabBarStyle: { paddingTop: 5 } }}
+      screenOptions={{ headerShown: false }}
     >
       <Tab.Screen
         name="Home"

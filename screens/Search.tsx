@@ -12,12 +12,15 @@ import {
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { getKeyword } from "../services/SearchServices";
-import { Genres } from "../types/index.types";
+import { Genres, Navigation } from "../types/index.types";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Search() {
   const [textSearch, setTextSearch] = useState("");
   const [results, setResults] = useState<Genres[]>([]);
   const timeoutRef = useRef<any>();
+
+  const navigation = useNavigation<Navigation>();
 
   const handleTextChange = (
     e: NativeSyntheticEvent<TextInputChangeEventData>
@@ -43,6 +46,9 @@ export default function Search() {
       <View style={styles.searchInput}>
         <AntDesign color="#333" name="search1" size={20} />
         <TextInput
+          onSubmitEditing={() =>
+            navigation.navigate("Results", { keyword: textSearch })
+          }
           value={textSearch}
           onChange={handleTextChange}
           placeholder="Search...."
@@ -61,8 +67,14 @@ export default function Search() {
         style={{ marginBottom: 32 }}
         showsVerticalScrollIndicator={false}
         data={results}
+        keyExtractor={(item) => item?.id?.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.searchResultItemWrap} key={item.id}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Results", { keyword: item.name })
+            }
+            style={styles.searchResultItemWrap}
+          >
             <Text style={styles.searchResultItemText}>{item.name}</Text>
             <AntDesign color="#333" name="enter" size={20} />
           </TouchableOpacity>

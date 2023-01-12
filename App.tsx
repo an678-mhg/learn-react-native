@@ -4,6 +4,7 @@ import Details from "./screens/Details";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import BottomTabs from "./components/BottomTabs";
 import { StackParamList } from "./types/index.types";
+import Results from "./screens/Results";
 
 const queryClientOptions = {
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
@@ -20,6 +21,7 @@ export default function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="App" component={BottomTabs} />
           <Stack.Screen name="Details" component={Details} />
+          <Stack.Screen name="Results" component={Results} />
         </Stack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>

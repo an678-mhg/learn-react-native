@@ -8,6 +8,8 @@ export const getImage = (poster_path: string) => {
 export const getBackdropImage = (backdrop_path: string) => {
   return `https://image.tmdb.org/t/p/original/${backdrop_path}`;
 };
+export const getImagePlacehoder = () =>
+  "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bW92aWV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
 export const genres: Genres[] = [
   {
     id: 28,

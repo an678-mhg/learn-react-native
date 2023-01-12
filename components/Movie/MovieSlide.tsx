@@ -19,11 +19,12 @@ export default function MovieSlide({
     <View style={styles.movieSlideContainer}>
       {isShowTitle && <MovieTitle title={title} />}
       <FlatList
+        keyExtractor={(item) => item?.id?.toString()}
         showsHorizontalScrollIndicator={false}
         style={isShowTitle && styles.movieSlideList}
         horizontal
         data={data}
-        renderItem={({ item }) => <MovieItem key={item.id} item={item} />}
+        renderItem={({ item }) => <MovieItem item={item} />}
       />
     </View>
   );

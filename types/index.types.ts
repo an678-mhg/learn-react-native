@@ -36,6 +36,7 @@ export interface Genres {
 export type StackParamList = {
   App: undefined;
   Details: { id: number; media_type: "movie" | "tv" };
+  Results: { keyword: string };
 };
 
 export type TabParamList = {
@@ -50,7 +51,7 @@ export type Navigation = CompositeNavigationProp<
   NativeStackNavigationProp<StackParamList>
 >;
 
-export type Route = RouteProp<StackParamList>;
+export type Route = RouteProp<StackParamList, "Details">;
 
 export interface BelongsToCollection {
   id: number;
@@ -139,4 +140,17 @@ export interface Credit {
   id: number;
   cast: Cast[];
   crew: Crew[];
+}
+
+export interface Video {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: Date;
+  id: string;
 }

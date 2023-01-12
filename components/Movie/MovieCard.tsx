@@ -1,10 +1,10 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { Genres, Movie, Navigation } from "../../types/index.types";
-import { genres, getImage } from "../../utils/contanst";
+import { genres, getImage, getImagePlacehoder } from "../../utils/contanst";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import GenresItem from "../GenresItem";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 interface MovieCardProps {
   item: Movie;
@@ -25,7 +25,11 @@ export default function MovieCard({ item }: MovieCardProps) {
     >
       <Image
         style={styles.movieCardImage}
-        source={{ uri: getImage(item.poster_path) }}
+        source={{
+          uri: item?.poster_path
+            ? getImage(item.poster_path)
+            : getImagePlacehoder(),
+        }}
       />
       <View style={styles.movieCardContent}>
         <Text numberOfLines={1} style={styles.movieCardTitle}>

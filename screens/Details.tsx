@@ -159,7 +159,7 @@ const Details = ({ route }: DetailsProps) => {
 
       {openTrailer && (
         <ModalTrailer
-          video={videos.results[0]}
+          videos={videos.results}
           visible={openTrailer}
           handleClose={() => {
             setOpenTrailer(false);

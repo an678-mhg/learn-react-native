@@ -75,8 +75,14 @@ export default function Search() {
             }
             style={styles.searchResultItemWrap}
           >
+            <AntDesign
+              color="#333"
+              name="search1"
+              size={16}
+              style={{ marginRight: 10 }}
+            />
             <Text style={styles.searchResultItemText}>{item.name}</Text>
-            <AntDesign color="#333" name="enter" size={20} />
+            <AntDesign color="#333" name="enter" size={16} />
           </TouchableOpacity>
         )}
       />
@@ -97,7 +103,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   searchResultItemWrap: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
     paddingVertical: 10,
     flexDirection: "row",
     alignItems: "center",
@@ -109,5 +115,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
     color: "#333",
+    flex: 1,
   },
 });

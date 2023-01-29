@@ -18,6 +18,7 @@ export default function Results({ route }: ResultsProps) {
       [`search-${keyword}`],
       ({ pageParam = 1 }) => {
         if (!keyword.trim()) return;
+        console.log(pageParam);
         return searchMovieByKeyword(keyword, pageParam);
       },
       {
@@ -31,36 +32,36 @@ export default function Results({ route }: ResultsProps) {
   return (
     <SafeAreaView style={styles.resultsWrap}>
       <BackHeader title={`Results for "${keyword}"`} />
-      {!data && <ActivityIndicator size={30} style={{ marginVertical: 16 }} />}
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        style={styles.resultsList}
-        data={
-          data &&
-          data?.pages?.reduce((final, item) => {
-            // @ts-ignore
-            final.push(...item.results);
-            return final;
-          }, [] as Movie[])
-        }
-        keyExtractor={(item) => item?.id?.toString()}
-        renderItem={({ item }) => <MovieCard item={item} />}
-        onEndReached={() => hasNextPage && fetchNextPage()}
-        ListFooterComponent={() =>
-          isFetchingNextPage ? (
-            <ActivityIndicator size={30} style={{ marginBottom: 16 }} />
-          ) : null
-        }
-      />
+      {!data ? (
+        <ActivityIndicator size={50} style={{ marginVertical: 16, flex: 1 }} />
+      ) : (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={
+            data &&
+            data?.pages?.reduce((final, item) => {
+              // @ts-ignore
+              final.push(...item.results);
+              return final;
+            }, [] as Movie[])
+          }
+          keyExtractor={(item) => item?.id?.toString()}
+          renderItem={({ item }) => <MovieCard item={item} />}
+          onEndReached={() => hasNextPage && fetchNextPage()}
+          ListFooterComponent={() =>
+            isFetchingNextPage ? (
+              <ActivityIndicator size={50} style={{ marginBottom: 16 }} />
+            ) : null
+          }
+        />
+      )}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   resultsWrap: {
-    padding: 16,
-  },
-  resultsList: {
-    marginVertical: 16,
+    paddingHorizontal: 16,
+    flex: 1,
   },
 });

@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   backHeaderWrap: {
     flexDirection: "row",
     alignItems: "center",
+    paddingVertical: 16,
   },
   backHeaderTitle: {
     fontWeight: "600",

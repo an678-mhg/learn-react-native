@@ -30,6 +30,7 @@ export default function ModalTrailer({
       <View style={styles.modalContainer}>
         <AntDesign onPress={handleClose} name={"close"} size={30} />
         <VideoIframe
+          videoIndex={videoIndex}
           nextVideo={nextVideo}
           prevVideo={prevVideo}
           item={videos[videoIndex]}

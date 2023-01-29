@@ -37,12 +37,13 @@ export type StackParamList = {
   App: undefined;
   Details: { id: number; media_type: "movie" | "tv" };
   Results: { keyword: string };
+  Bookmark: undefined;
+  Cast: { name: string; castId: number };
 };
 
 export type TabParamList = {
   Home: undefined;
   Search: undefined;
-  Bookmark: undefined;
   Profile: undefined;
 };
 

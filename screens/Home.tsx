@@ -7,9 +7,9 @@ import { getHome } from "../services/HomeServices";
 import Loading from "../components/Loading";
 
 const Home = () => {
-  const { data } = useQuery(["Home"], getHome);
+  const { data, isLoading } = useQuery(["Home"], getHome);
 
-  if (!data) {
+  if (isLoading) {
     return <Loading />;
   }
 

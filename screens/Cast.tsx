@@ -21,7 +21,7 @@ export default function Cast({ route }: CastProps) {
 
 const styles = StyleSheet.create({
   castContainer: {
-    padding: 16,
+    paddingHorizontal: 16,
     flex: 1,
   },
   castContent: {

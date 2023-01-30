@@ -37,7 +37,9 @@ export default function MovieCard({ item }: MovieCardProps) {
         </Text>
         <View style={styles.movieItemStar}>
           <AntDesign name="star" size={15} color="#FFC319" />
-          <Text style={styles.movieItemStarTitle}>{item.vote_average}</Text>
+          <Text style={styles.movieItemStarTitle}>
+            {item.vote_average?.toFixed(1)}
+          </Text>
         </View>
         <View style={styles.movieCardGenresList}>
           {(item?.genre_ids?.length > 3
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
   },
   movieItemTitle: {
     fontSize: 15,
-    fontWeight: "700",
+    fontWeight: "600",
     marginTop: 5,
   },
   movieItemStarTitle: {

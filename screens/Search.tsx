@@ -9,6 +9,7 @@ import {
   FlatList,
   TouchableOpacity,
   Text,
+  ActivityIndicator,
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { getKeyword } from "../services/SearchServices";
@@ -18,6 +19,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function Search() {
   const [textSearch, setTextSearch] = useState("");
   const [results, setResults] = useState<Genres[]>([]);
+  const [loading, setLoading] = useState(false);
   const timeoutRef = useRef<any>();
 
   const navigation = useNavigation<Navigation>();
@@ -32,12 +34,14 @@ export default function Search() {
 
     timeoutRef.current = setTimeout(async () => {
       if (!value.trim()) return;
+      setLoading(true);
       try {
         const data = await getKeyword(value);
         setResults(data.results);
       } catch (error) {
         console.log(error);
       }
+      setLoading(false);
     }, 300);
   };
 
@@ -54,7 +58,8 @@ export default function Search() {
           placeholder="Search...."
           style={{ flex: 1, paddingVertical: 5, paddingLeft: 10 }}
         />
-        {textSearch?.trim()?.length > 0 && (
+        {loading && <ActivityIndicator color="#92ABEB" size={20} />}
+        {!loading && textSearch?.trim()?.length > 0 && (
           <AntDesign
             onPress={() => setTextSearch("")}
             color="#333"

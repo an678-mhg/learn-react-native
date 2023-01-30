@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   movieSlideList: {
-    marginTop: 16,
+    marginTop: 10,
   },
 });

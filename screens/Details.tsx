@@ -18,7 +18,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import MaterialCommunity from "react-native-vector-icons/MaterialCommunityIcons";
 import GenresItem from "../components/GenresItem";
 import CastItem from "../components/CastItem";
 import MovieSlide from "../components/Movie/MovieSlide";
@@ -91,11 +90,10 @@ const Details = ({ route }: DetailsProps) => {
             <View style={styles.movieItemStar}>
               <AntDesign name="star" size={15} color="#FFC319" />
               <Text style={styles.movieItemStarTitle}>
-                {movie.vote_average}
+                {movie.vote_average.toFixed(1)}
               </Text>
             </View>
           </View>
-          <MaterialCommunity color="#333" name="bookmark-outline" size={30} />
         </View>
         <View style={styles.movieCardGenresList}>
           {movie.genres.map((item) => (
@@ -233,16 +231,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   detailMovieDescription: {
-    marginTop: 10,
+    marginTop: 20,
   },
   detailMovieDescriptionTitle: {
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: "600",
   },
   detailMovieDescriptionText: {
     fontSize: 14,
     color: "#9C9C9C",
-    marginTop: 5,
+    marginTop: 10,
   },
 });
 

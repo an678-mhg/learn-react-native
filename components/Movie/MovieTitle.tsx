@@ -16,7 +16,7 @@ export default function MovieTitle({ title }: MovieTitleProps) {
 const styles = StyleSheet.create({
   movieSlideTitle: {
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: "600",
   },
   movieSlideWrapTitle: {
     flexDirection: "row",

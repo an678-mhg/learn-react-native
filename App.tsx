@@ -5,8 +5,8 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import BottomTabs from "./components/BottomTabs";
 import { StackParamList } from "./types/index.types";
 import Results from "./screens/Results";
-import BookMark from "./screens/BookMark";
 import Cast from "./screens/Cast";
+import { StatusBar } from "react-native";
 
 const queryClientOptions = {
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
@@ -24,10 +24,10 @@ export default function App() {
           <Stack.Screen name="App" component={BottomTabs} />
           <Stack.Screen name="Details" component={Details} />
           <Stack.Screen name="Results" component={Results} />
-          <Stack.Screen name="Bookmark" component={BookMark} />
           <Stack.Screen name="Cast" component={Cast} />
         </Stack.Navigator>
       </NavigationContainer>
+      <StatusBar backgroundColor="#333" />
     </QueryClientProvider>
   );
 }

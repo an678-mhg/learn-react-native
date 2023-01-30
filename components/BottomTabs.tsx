@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Feather from "react-native-vector-icons/Feather";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Home from "../screens/Home";
-import Profile from "../screens/Profile";
 import Search from "../screens/Search";
 import { TabParamList } from "../types/index.types";
 
@@ -38,20 +37,6 @@ function BottomTabs() {
             <AntDesign
               color={focused ? "#1D1B52" : "#bdc3c7"}
               name="search1"
-              size={25}
-            />
-          ),
-          title: "",
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <AntDesign
-              color={focused ? "#1D1B52" : "#bdc3c7"}
-              name="user"
               size={25}
             />
           ),

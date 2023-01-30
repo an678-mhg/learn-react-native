@@ -13,12 +13,11 @@ type ResultsProps = NativeStackScreenProps<StackParamList, "Results">;
 export default function Results({ route }: ResultsProps) {
   const { keyword } = route.params;
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQuery(
       [`search-${keyword}`],
       ({ pageParam = 1 }) => {
         if (!keyword.trim()) return;
-        console.log(pageParam);
         return searchMovieByKeyword(keyword, pageParam);
       },
       {
@@ -32,9 +31,10 @@ export default function Results({ route }: ResultsProps) {
   return (
     <SafeAreaView style={styles.resultsWrap}>
       <BackHeader title={`Results for "${keyword}"`} />
-      {!data ? (
+      {isLoading && !data && (
         <ActivityIndicator size={50} style={{ marginVertical: 16, flex: 1 }} />
-      ) : (
+      )}
+      {data && data?.pages?.length > 0 && (
         <FlatList
           showsVerticalScrollIndicator={false}
           data={
@@ -45,7 +45,7 @@ export default function Results({ route }: ResultsProps) {
               return final;
             }, [] as Movie[])
           }
-          keyExtractor={(item) => item?.id?.toString()}
+          keyExtractor={(item, index) => `${item.id}${index}`}
           renderItem={({ item }) => <MovieCard item={item} />}
           onEndReached={() => hasNextPage && fetchNextPage()}
           ListFooterComponent={() =>

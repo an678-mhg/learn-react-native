@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "test-video-app",
-    "slug": "test-video-app",
+    "name": "Phim Moi",
+    "slug": "Phim Moi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

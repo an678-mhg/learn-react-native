@@ -27,7 +27,7 @@ export default function App() {
           <Stack.Screen name="Cast" component={Cast} />
         </Stack.Navigator>
       </NavigationContainer>
-      <StatusBar backgroundColor="#333" />
+      <StatusBar animated={true} />
     </QueryClientProvider>
   );
 }
